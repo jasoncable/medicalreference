@@ -1,0 +1,125 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130168261-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-130168261-1');
+    </script>
+    <title>Jason's Medical Reference</title>
+    <meta name="description" content="Prescription drug prices and physician's fees.">
+    <meta name="keywords" content="fda, drugs, orangebook, ndc, prescription, prescription drugs, drug prices">
+    <meta name="author" content="Jason L. Cable">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="icon" type="image/png" href="~/images/favicon.png"/>
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt|Source+Code+Pro|Source+Sans+Pro" rel="stylesheet">
+    @RenderSection("header", false)
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">@*<img src="~/images/jmr-square.svg" />*@ Jason's Medical Reference</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/About">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/DataSets">Data Sets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Disclaimers">Disclaimers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Licenses">Licenses</a>
+                </li>
+            </ul>
+            @using (Html.BeginForm("RxSearch", "Search", FormMethod.Post, new { @class="form-inline my-2 my-lg-0", id = "navbarSearchForm"}))
+            {
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="rxSearchString" name="rxSearchString" />
+                <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+            }
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 mb-md-0 mb-2">
+                <h2>Contact Us</h2>
+                <address>
+                    <strong>Jason L. Cable</strong><br>
+                    Pittsburgh, PA
+                </address>
+                <h4>Social</h4>
+                <div class="row">
+                    <div class="col-2"><a href="https://facebook.com/jasoncable" target="_blank"><img src="~/images/facebook.svg" alt=""></a></div>
+                    <div class="col-2"><a href="https://linkedin.com/u/jasoncable" target="_blank"><img src="~/images/linkedin.svg" alt=""></a></div>
+                    <div class="col-2"><a href="https://twitter.com/gaypgh" target="_blank"><img src="~/images/twitter.svg" alt=""></a></div>
+                    <div class="col-2"><a href="mailto:jason@jasonsmedref.com" target="_blank"><img src="~/images/at.svg" alt=""></a></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <h2>Data Sets</h2>
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img class="mr-3" src="~/images/pills.svg" style="width: 30px; height: 30px;" />
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">Rx Pricing</h5>
+                            <p class="mb-0">I use data that the US Government freely provides to the public.  I am here to make it easier to see prescription drug prices paid by the government.</p>
+                        </div>
+                    </li>
+                    <li class="media my-4">
+                        <img class="mr-3" src="~/images/user-md.svg" style="width: 30px; height: 30px;">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">Physician's Fees</h5>
+                            <p class="mb-0">Coming soon...</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-12">
+                <h2>Why?</h2>
+                <p>I created this website because the public has right to be able to see the US Government's data on prescription drugs in one convenient location.  Everyone should be able to see the approximate price of their drugs.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p>Portions Copyright &copy; Jason L. Cable. Some rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/typeahead.js"></script>
+    <script src="~/js/site.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

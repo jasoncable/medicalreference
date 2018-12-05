@@ -1,0 +1,70 @@
+﻿@using JasonsMedRef.Models.Enums
+@using JasonsMedRef.Web.Models
+@model RxSearchResultModel
+
+@section scripts
+{
+    <script>
+        medRefRxSearch.setup();
+    </script>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="text-center col-md-12 col-12">
+            @Html.Partial("_RxSearchBox")
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table id="rxSearchTable" class="table table-striped table-bordered table-hover table-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Drug Type</th>
+                    <th>Ingredient</th>
+                    <th>Brand Names</th>
+                    <th>Dosage Type</th>
+                    <th>Route</th>
+                    <th>Click for Pricing</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rec in Model.Results)
+                    {
+                        <tr>
+                            <td>
+                                @if (rec.DrugType == DrugType.Prescription)
+                                {
+                                    <div class="drug-type">Rx</div>
+                                }
+                                else if (rec.DrugType == DrugType.OverTheCounter)
+                                {
+                                    <div class="drug-type">OTC</div>
+                                }
+                                else
+                                {
+                                    <div>@rec.DrugType.ToString()</div>
+                                }
+                            </td>
+                            <td>@rec.Ingredient</td>
+                            <td>
+                                @foreach (var tn in rec.TradeNames)
+                                {
+                                    <div>@tn</div>
+                                }
+                            </td>
+                            <td>@rec.DosageFormText</td>
+                            <td>@rec.RouteOfAdminText</td>
+                            <td><button class="btn btn-primary rxDetailBtn" data-uri="@Url.Action("RxDetail", "Search", new {drugId = rec.Id})">Details</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*<td>@if(rec.DrugType == DrugType.Prescription){ <img src="~/images/prescription.svg" style="height: 35px; width: 35px;" /> }</td>*@

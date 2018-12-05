@@ -1,0 +1,33 @@
+﻿@using JasonsMedRef.Models
+@model List<StateDrugUtilization>
+
+<table id="sduDetailTable" class="table table-striped table-bordered table-hover table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>State</th>
+            <th>Number of Scripts</th>
+            <th>Units</th>
+            <th>Medicaid Amt. Reimbursed</th>
+            <th>Non-Medicaid Amt. Reimbursed</th>
+            <th>Avg. Price per Unit</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var rec in Model.OrderBy(x=> x.State))
+    {
+        <tr>
+            <td class="center">@rec.State</td>
+            <td class="mono center">@rec.NumberOfScripts.ToDisplayString()</td>
+            <td class="mono center">@rec.UnitsReimbursed.ToDisplayString()</td>
+            <td class="mono center">@rec.MedicaidAmountReimbursed.ToDisplayString()</td>
+            <td class="mono center">@rec.NonMedicaidAmountReimbursed.ToDisplayString()</td>
+            <td class="mono center">@((rec.TotalAmountReimbursed / rec.UnitsReimbursed).ToDisplayString())</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (Model.Count == 0)
+{
+    <div>No Data Found.</div>
+}

@@ -1,0 +1,108 @@
+﻿@using JasonsMedRef.Models
+@using JasonsMedRef.Models.Enums
+@model Drug
+
+<input type="hidden" id="drugId" value="@Model.Id" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @Html.Partial("_RxSearchBox")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="middle">
+                @if (Model.DrugType == DrugType.Prescription)
+                {
+                    <div class="drug-type middle">Rx</div>
+                }
+                else if (Model.DrugType == DrugType.OverTheCounter)
+                {
+                    <div class="drug-type middle">OTC</div>
+                }
+                else
+                {
+                    <div>@Model.DrugType.ToString()</div>
+                }
+                @if (Model.Schedule.HasValue)
+                {<span class="badge badge-danger middle" style="font-size: 20px;">Schedule @(((int) Model.Schedule.Value).ToString())</span>}
+                @Model.Ingredient
+            </h1>
+            <h2>@Model.DosageFormText, @Model.RouteOfAdminText</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <h3>Trade Names</h3>
+            <ul>
+                @foreach (var s in Model.TradeNames.OrderBy(x => x))
+                {
+                    <li>@s</li>
+                }
+            </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <h3>Available Strengths</h3>
+            <ul>
+                @foreach (var s in Model.Strengths.OrderBy(x => x))
+                {
+                    <li>@s</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <h2>NADAC</h2>
+            <div id="nadacData"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <h2>ACA FUL</h2>
+            <div id="fulData"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+            <h2>State Drug Utilization (Q3-2018)</h2>
+            <div id="sduData"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+            <h2>Patents</h2>
+            <div id="patentData"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <h2>Classes</h2>
+            <ul>
+                @foreach (var s in Model.PharmaClassesText.OrderBy(x => x))
+                {
+                    <li>@s</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+            <h2>Packages</h2>
+            <div id="packageData"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+            <h2>Applications</h2>
+            <div id="applicationData"></div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{ 
+    <script>
+        medRefRxDetail.setup();
+    </script>
+}

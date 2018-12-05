@@ -1,0 +1,80 @@
+﻿@section scripts
+{
+    <script>
+        medRefIndex.setup();
+    </script>
+}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                <div>
+                    <img src="~/images/jmr-wide.svg" alt="" class="img-fluid" />
+                </div>
+                <h2 class="text-center">Unlocking the US Government's hidden data.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="text-center col-md-6 col-12">
+            @using (Html.BeginForm("RxSearch", "Search", FormMethod.Post, new {id = "rxSearchForm"}))
+            {
+                <h3>Prescription Drug Prices</h3>
+                <p>Find out what that drug really costs.</p>
+                <div class="form-group">
+                    <input type="hidden" id="rxSearchId"/>
+                    <input type="text" class="form-control" id="rxSearchString" name="rxSearchString" placeholder="enter brand or generic name"/>
+                </div>
+                <button type="submit" class="btn btn-danger btn-lg" role="button">Search</button>
+            }
+        </div>
+        <div class="text-center col-md-6 col-12">
+            <h3>Physician's Fees</h3>
+            <p>Coming soon!</p>
+            <div class="form-group">
+                <input type="text" class="form-control" disabled="disabled" />
+            </div>
+            <button type="button" class="btn btn-info btn-lg" href="#" role="button" disabled="disabled">Search</button>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-12">
+            <h2>Search Examples</h2>
+            <ul>
+                <li><a href="/Search/RxSearch?rxSearchString=clonazepam">clonazepam</a> (controlled)</li>
+                <li><a href="/Search/RxSearch?rxSearchString=omeprazole">omeprazole</a> (OTC)</li>
+                <li><a href="/Search/RxSearch?rxSearchString=pradaxa">Pradaxa</a> (on patent)</li>
+                <li><a href="/Search/RxSearch?rxSearchString=clobetasol">clobetasol</a> (multiple forms)</li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <h2>Drugs Grouped By</h2>
+            <ul>
+                <li>Ingredient</li>
+                <li>Route of Administration</li>
+                <li>Dosage Form</li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <h2>To Do</h2>
+            <ul>
+                <li>Type-ahead</li>
+                <li>More data sets</li>
+                <li>Public API</li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <h2>Support This Site</h2>
+            <div class="text-center">
+                <p><a href="http://a.co/2Adx93y" target="_blank"><img src="~/images/amazon-wishlist.svg" style="height: 40px;" /></a></p>
+                <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LC4P4JAB5AELL&source=url" target="_blank"><img src="~/images/paypal-donate.svg" style="height: 40px;" /></a></p>
+            </div>
+        </div>
+    </div>
+</div>
