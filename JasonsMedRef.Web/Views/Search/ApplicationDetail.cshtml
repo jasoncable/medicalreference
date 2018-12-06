@@ -16,7 +16,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var rec in Model)
+    @foreach (var rec in Model.OrderBy( x=> x.ApprovalDate))
     {
         <tr>
             <td>@(rec.ApprovalDate == null ? "Before 1982" : rec.ApprovalDate.Value.ToString("MM/dd/yyyy"))</td>

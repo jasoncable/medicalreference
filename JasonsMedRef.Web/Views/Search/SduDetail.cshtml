@@ -5,6 +5,7 @@
     <thead class="thead-dark">
         <tr>
             <th>State</th>
+            <th>Qtr. End Date</th>
             <th>Number of Scripts</th>
             <th>Units</th>
             <th>Medicaid Amt. Reimbursed</th>
@@ -13,10 +14,11 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var rec in Model.OrderBy(x=> x.State))
+    @foreach (var rec in Model.OrderBy(x=> x.State).ThenBy(x => x.ReportDate))
     {
         <tr>
             <td class="center">@rec.State</td>
+            <td class="center">@rec.ReportDate.ToString("MM/dd/yyyy")</td>
             <td class="mono center">@rec.NumberOfScripts.ToDisplayString()</td>
             <td class="mono center">@rec.UnitsReimbursed.ToDisplayString()</td>
             <td class="mono center">@rec.MedicaidAmountReimbursed.ToDisplayString()</td>

@@ -16,7 +16,6 @@ namespace JasonsMedRef.Models
         public Guid DrugId { get; set; }
         public Guid PackageId { get; set; }
         public DateTime ReportDate { get; set; }
-        public string ProductName { get; set; }
         public bool? SuppressionUsed { get; set; }
         public float? UnitsReimbursed { get; set; }
         public float? NumberOfScripts { get; set; }

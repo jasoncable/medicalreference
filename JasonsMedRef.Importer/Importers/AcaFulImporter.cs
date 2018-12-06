@@ -43,7 +43,8 @@ namespace JasonsMedRef.Importer.Importers
                         Ful = rec.AcaFedUpperLimit,
                         PackageSize = rec.PackageSize,
                         ReportingDate = new DateTime(rec.Year, rec.Month, 1),
-                        UnitType = rec.MdrUnitType
+                        UnitType = rec.MdrUnitType,
+                        Ndc = rec.Ndc
                     };
 
                     ImporterCache.Instance.AddOrUpdate(ful, rec.Ndc);

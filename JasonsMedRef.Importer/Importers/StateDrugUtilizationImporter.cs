@@ -40,8 +40,7 @@ namespace JasonsMedRef.Importer.Importers
                     {
                         UtilizationType = rec.UtilizationType,
                         State = rec.State,
-                        ReportDate = new DateTime(Convert.ToInt32(rec.Year), Convert.ToInt32(rec.Quarter), 1),
-                        ProductName = rec.ProductName,
+                        ReportDate = YearQtrToEndDate(Convert.ToInt32(rec.Year), Convert.ToInt32(rec.Quarter)),
                         SuppressionUsed = rec.SuppressionUsed,
                         UnitsReimbursed = rec.UnitsReimbursed,
                         NumberOfScripts = rec.NumberOfScripts,
@@ -59,6 +58,24 @@ namespace JasonsMedRef.Importer.Importers
             }
 
             return 0;
+        }
+
+        private static DateTime YearQtrToEndDate(int year, int quarter)
+        {
+            switch (quarter)
+            {
+                case 1:
+                    return new DateTime(year, 3, 31);
+                case 2:
+                    return new DateTime(year, 6, 30);
+                case 3:
+                    return new DateTime(year, 9, 30);
+                case 4:
+                    return new DateTime(year, 12, 31);
+                default:
+                    return new DateTime();
+            }
+
         }
     }
 }

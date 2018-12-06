@@ -4,6 +4,7 @@
 <table id="fulDetailTable"  class="table table-striped table-bordered table-hover table-sm">
     <thead class="thead-dark">
     <tr>
+        <th>NDC</th>
         <th>Price Date</th>
         <th>Unit Type</th>
         <th>Package Size</th>
@@ -12,9 +13,10 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var rec in Model)
+    @foreach (var rec in Model.OrderBy(x => x.Ndc))
     {
         <tr>
+            <td>@rec.Ndc</td>
             <td>@rec.ReportingDate.ToString("MM/dd/yyyy")</td>
             <td>@rec.UnitType</td>
             <td class="mono center">@rec.PackageSize</td>

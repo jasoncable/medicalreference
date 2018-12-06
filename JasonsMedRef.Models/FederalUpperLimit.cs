@@ -11,6 +11,7 @@ namespace JasonsMedRef.Models
         public Guid Id { get; set; }
         public Guid DrugId { get; set; }
         public Guid PackageId { get; set; }
+        public string Ndc { get; set; }
         public string UnitType { get; set; }
         public double? PackageSize { get; set; }
         public double? AvgMfgPrice { get; set; }

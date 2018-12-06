@@ -86,7 +86,8 @@ namespace JasonsMedRef.Repository
         {
             var result = _client.Search<FederalUpperLimit>(sr => sr
                 .Query(q => q
-                    .Term(t => t.DrugId, drugId)));
+                    .Term(t => t.DrugId, drugId))
+                .Size(250));
 
             if (result.Documents.Count == 0)
                 return new List<FederalUpperLimit>();
@@ -98,7 +99,8 @@ namespace JasonsMedRef.Repository
         {
             var result = _client.Search<Nadac>(sr => sr
                 .Query(q => q
-                    .Term(t => t.DrugId, drugId)));
+                    .Term(t => t.DrugId, drugId))
+                .Size(250));
 
             if (result.Documents.Count == 0)
                 return new List<Nadac>();
@@ -110,19 +112,38 @@ namespace JasonsMedRef.Repository
         {
             var result = _client.Search<StateDrugUtilization>(sr => sr
                 .Query(q => q
-                    .Term(t => t.DrugId, drugId)));
+                    .Term(t => t.DrugId, drugId))
+                .Size(5000));
 
             if (result.Documents.Count == 0)
+            {
                 return new List<StateDrugUtilization>();
+            }
             else
-                return result.Documents.ToList();
+            {
+                return result.Documents.GroupBy(x => new {x.State, x.ReportDate})
+                    .Select( x => new StateDrugUtilization
+                    {
+                        DrugId = drugId,
+                        State = x.Key.State,
+                        ReportDate = x.Key.ReportDate,
+                        MedicaidAmountReimbursed = x.Sum( y => y.MedicaidAmountReimbursed ),
+                        NonMedicaidAmountReimbursed = x.Sum( y=> y.NonMedicaidAmountReimbursed),
+                        NumberOfScripts = x.Sum(y => y.NumberOfScripts),
+                        TotalAmountReimbursed =x.Sum(y => y.TotalAmountReimbursed),
+                        UnitsReimbursed = x.Sum( y => y.UnitsReimbursed)
+                    }).ToList();
+
+                //return result.Documents.ToList();
+            }
         }
 
         public List<Patent> GetPatentsByDrugId(Guid drugId)
         {
             var result = _client.Search<Patent>(sr => sr
                 .Query(q => q
-                    .Term(t => t.DrugId, drugId)));
+                    .Term(t => t.DrugId, drugId))
+                .Size(250));
 
             if (result.Documents.Count == 0)
                 return new List<Patent>();
@@ -134,7 +155,8 @@ namespace JasonsMedRef.Repository
         {
             var result = _client.Search<Application>(sr => sr
                 .Query(q => q
-                    .Term(t => t.DrugId, drugId)));
+                    .Term(t => t.DrugId, drugId))
+                .Size(250));
 
             if (result.Documents.Count == 0)
                 return new List<Application>();
@@ -146,7 +168,8 @@ namespace JasonsMedRef.Repository
         {
             var result = _client.Search<Package>(sr => sr
                 .Query(q => q
-                    .Term(t => t.DrugId, drugId)));
+                    .Term(t => t.DrugId, drugId))
+                .Size(500));
 
             if (result.Documents.Count == 0)
                 return new List<Package>();
