@@ -83,7 +83,7 @@ namespace JasonsMedRef.Web
         {
             if (input == 0d)
             {
-                return "0.00";   
+                return "0.00";
             }
             else if (input < 0.25)
             {

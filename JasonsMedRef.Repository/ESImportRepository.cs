@@ -67,52 +67,45 @@ namespace JasonsMedRef.Repository
                 StateDrugUtilization.IndexName
                 );
 
-            _client.DeleteIndex(indexesToDelete);
+            DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(indexesToDelete);
+            deleteIndexRequest.IgnoreUnavailable = true;
+            _client.Indices.Delete(deleteIndexRequest);
 
-            _client.CreateIndex(Drug.IndexName,
+
+            _client.Indices.Create(Drug.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                    .Mappings(m => m
-                        .Map<Drug>(mt => mt.AutoMap())));
-            _client.CreateIndex(Application.IndexName,
+                        .Map<Drug>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(Application.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<Application>(mt => mt.AutoMap()))
-                    );
-            _client.CreateIndex(Exclusivity.IndexName,
+                        .Map<Application>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(Exclusivity.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<Exclusivity>(mt => mt.AutoMap()))
-                    );
-            _client.CreateIndex(FederalUpperLimit.IndexName,
+                        .Map<Exclusivity>(mt => mt.AutoMap()));
+            _client.Indices.Create(FederalUpperLimit.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<FederalUpperLimit>(mt => mt.AutoMap()))
-                    );
-            _client.CreateIndex(Nadac.IndexName,
+                        .Map<FederalUpperLimit>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(Nadac.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<Nadac>(mt => mt.AutoMap()))
-                    );
-            _client.CreateIndex(Package.IndexName,
+                        .Map<Nadac>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(Package.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<Package>(mt => mt.AutoMap()))
-                    );
-            _client.CreateIndex(Patent.IndexName,
+                        .Map<Package>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(Patent.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<Patent>(mt => mt.AutoMap()))
-                    );
-            _client.CreateIndex(PharmaClass.IndexName,
+                        .Map<Patent>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(PharmaClass.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                .Mappings(m => m
-                        .Map<PharmaClass>(mt => mt.AutoMap()))
-                );
-            _client.CreateIndex(StateDrugUtilization.IndexName,
+                        .Map<PharmaClass>(mt => mt.AutoMap()));
+
+            _client.Indices.Create(StateDrugUtilization.IndexName,
                 x => x.Settings(s => s.NumberOfShards(3))
-                    .Mappings(m => m
-                        .Map<StateDrugUtilization>(mt => mt.AutoMap()))
-            );
+                        .Map<StateDrugUtilization>(mt => mt.AutoMap()));
 
         }
         #endregion
