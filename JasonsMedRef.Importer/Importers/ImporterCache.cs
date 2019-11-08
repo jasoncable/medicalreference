@@ -34,6 +34,9 @@ namespace JasonsMedRef.Importer.Importers
         public Dictionary<ImporterCacheKeyDrug, Drug> Drugs { get; set; } =
             new Dictionary<ImporterCacheKeyDrug, Drug>();
 
+        public Dictionary<Guid, Drug> DrugsByDrugId { get; set; } =
+            new Dictionary<Guid, Drug>();
+
         public Dictionary<ImporterCacheKeyApplication, Guid> AppToDrug { get; set; } =
             new Dictionary<ImporterCacheKeyApplication, Guid>();
 
@@ -200,6 +203,7 @@ namespace JasonsMedRef.Importer.Importers
                 drugId = d.Id;
                 d.PharmaClasses = PharmaClasses.Where(x => d.PharmaClassesText.Any(y => y == x.Key)).Select(x => x.Value.Id).ToList();
                 Drugs.Add(drugKey, d);
+                DrugsByDrugId.TryAdd(d.Id, d);
             }
 
             if (app != null)

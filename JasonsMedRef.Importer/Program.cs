@@ -9,6 +9,7 @@ using JasonsMedRef.Importer.Importers;
 using JasonsMedRef.Models;
 using JasonsMedRef.Repository;
 using System.Collections.Generic;
+using JasonsMedRef.Importer.Exporters;
 
 namespace JasonsMedRef.Importer
 {
@@ -38,6 +39,9 @@ namespace JasonsMedRef.Importer
 
                 await NdcImporter.Import(config.WorkingFolder,
                     config.SiteConfigs.Single(x => x.ShortName == "NDC"));
+
+                //await FormularyExporter.Export();
+                //await JsonExporter.Export(@"c:\temp\drugs.json");
 
                 await NadacImporter.Import(config.WorkingFolder,
                     config.SiteConfigs.Single(x => x.ShortName == "NADAC"));
