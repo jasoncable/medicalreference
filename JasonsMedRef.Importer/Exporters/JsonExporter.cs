@@ -11,10 +11,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 using JasonsMedRef.Models.JsonModels;
 using JasonsMedRef.Importer.Importers;
+using Newtonsoft.Json;
 
 namespace JasonsMedRef.Importer.Exporters
 {
@@ -22,24 +23,23 @@ namespace JasonsMedRef.Importer.Exporters
     {
         public static async Task<int> Export(string outputPath)
         {
-            var options = new JsonSerializerOptions
-            {
-                AllowTrailingCommas = false,
-                IgnoreNullValues = false,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            };
+            //var options = new JsonSerializerOptions
+            //{
+            //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            //    WriteIndented = true
+            //};
 
             JsonDrugs obj = new JsonDrugs();
 
             obj.Drugs =
-                (from d in ImporterCache.Instance.Drugs
-                 //join a2d in ImporterCache.Instance.AppToDrug on d.Value.Id equals a2d.Value
-                 //join a2a in ImporterCache.Instance.AppToApp on a2d.Key equals a2a.Key
-                 //join app in ImporterCache.Instance.Apps on a2a.Value equals app.Id
-                 //join e in ImporterCache.Instance.Exclusivities on app.Id equals e.ApplicationId
-                 //join pat in ImporterCache.Instance.Patents on app.Id equals pat.ApplicationId
-                 //join p in ImporterCache.Instance.Packages on app.ApplicationNumber equals p.ApplicationNumber
+                (from d in ImporterCache.Instance.Drugs.AsParallel()
+                     //join a2d in ImporterCache.Instance.AppToDrug on d.Value.Id equals a2d.Value
+                     //join a2a in ImporterCache.Instance.AppToApp on a2d.Key equals a2a.Key
+                     //join app in ImporterCache.Instance.Apps on a2a.Value equals app.Id
+                     //join e in ImporterCache.Instance.Exclusivities on app.Id equals e.ApplicationId
+                     //join pat in ImporterCache.Instance.Patents on app.Id equals pat.ApplicationId
+                     //join p in ImporterCache.Instance.Packages on app.ApplicationNumber equals p.ApplicationNumber
+                 where d.Value.Ingredient.StartsWith("a", StringComparison.CurrentCultureIgnoreCase)
                  select new JsonDrug
                  {
                      Ingredient = d.Value.Ingredient,
@@ -66,14 +66,14 @@ namespace JasonsMedRef.Importer.Exporters
                                          ReferenceStandard = app.ReferenceStandard,
                                          TeCode = app.TeCode,
                                          Exclusivities = (from e in ImporterCache.Instance.Exclusivities
-                                                          where e.DrugId == d.Value.Id && e.ApplicationId == app.Id
+                                                          where e.DrugId == d.Value.Id // && e.ApplicationId == app.Id
                                                           select new JsonExclusivity
                                                           {
                                                               ExclusivityCode = e.ExclusivityCode,
                                                               ExpirationDate = e.ExpirationDate
                                                           }).ToList(),
                                          Patents = (from p in ImporterCache.Instance.Patents
-                                                    where p.DrugId == d.Value.Id && p.ApplicationId == app.Id
+                                                    where p.DrugId == d.Value.Id // && p.ApplicationId == app.Id
                                                     select new JsonPatent
                                                     {
                                                         PatentNumber = p.PatentNumber,
@@ -81,7 +81,7 @@ namespace JasonsMedRef.Importer.Exporters
                                                     }
                                                     ).ToList(),
                                          Packages = (from pkg in ImporterCache.Instance.Packages
-                                                     where pkg.DrugId == d.Value.Id && pkg.ApplicationNumber == app.ApplicationNumber
+                                                     where pkg.DrugId == d.Value.Id // && pkg.ApplicationNumber == app.ApplicationNumber
                                                      select new JsonPackage
                                                      {
                                                          Description = pkg.Description,
@@ -101,11 +101,18 @@ namespace JasonsMedRef.Importer.Exporters
                      Strengths = d.Value.Strengths
                  }).ToList();
 
-            byte[] buffer = new byte[4096];
-            using FileStream fs = File.Create(outputPath);
-            await JsonSerializer.SerializeAsync(fs, obj, options);
-            await fs.FlushAsync();
-            fs.Close();
+            //byte[] buffer = new byte[4096];
+            //using FileStream fs = File.Create(outputPath);
+            //await JsonSerializer.SerializeAsync(fs, obj, options);
+            //await fs.FlushAsync();
+            //fs.Close();
+
+            using (StreamWriter sw = File.CreateText(outputPath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Formatting = Formatting.Indented;
+                serializer.Serialize(sw, obj);
+            }
 
             return 0;
         }

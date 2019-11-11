@@ -268,14 +268,16 @@ namespace JasonsMedRef.Models.Enums
         Swab,
         [EnumImportValue(new string[] { "SYRUP" })]
         Syrup,
-        [EnumImportValue(new string[] { "TABLET" })]
+        // merging these due to mismatches between OrangeBook and NDC
+        // ... I don't know if we have the same problem with the different capsule types, for sure with tablets
+        [EnumImportValue(new string[] { "TABLET", "TABLET, COATED", "TABLET, FILM COATED" })]
         Tablet,
         [EnumImportValue(new string[] { "TABLET, CHEWABLE" })]
         TabletChewable,
         [EnumImportValue(new string[] { "TABLET, CHEWABLE, EXTENDED RELEASE" })]
         TabletChewableExtendedRelease,
-        [EnumImportValue(new string[] { "TABLET, COATED" })]
-        TabletCoated,
+        //[EnumImportValue(new string[] { "TABLET, COATED" })]
+        //TabletCoated,
         [EnumImportValue(new string[] { "TABLET, COATED PARTICLES" })]
         TabletCoatedParticles,
         [EnumImportValue(new string[] { "TABLET, DELAYED RELEASE" })]
@@ -286,8 +288,8 @@ namespace JasonsMedRef.Models.Enums
         TabletEffervescent,
         [EnumImportValue(new string[] { "TABLET, EXTENDED RELEASE" })]
         TabletExtendedRelease,
-        [EnumImportValue(new string[] { "TABLET, FILM COATED" })]
-        TabletFilmCoated,
+        //[EnumImportValue(new string[] { "TABLET, FILM COATED" })]
+        //TabletFilmCoated,
         [EnumImportValue(new string[] { "TABLET, FILM COATED, EXTENDED RELEASE" })]
         TabletFilmCoatedExtendedRelease,
         [EnumImportValue(new string[] { "TABLET, FOR SOLUTION" })]

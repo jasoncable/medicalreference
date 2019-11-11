@@ -9,6 +9,7 @@ namespace JasonsMedRef.Importer
         public string WorkingFolder { get; set; }
         public ElasticSearchConfig ElasticSearch { get; set; }
         public List<SiteConfig> SiteConfigs { get; set; }
+        public NLogConfig NLogConfig { get; set; }
     }
 
     public class SiteConfig
@@ -22,5 +23,14 @@ namespace JasonsMedRef.Importer
     public class ElasticSearchConfig
     {
         public string ServerUri { get; set; }
+    }
+
+    public class NLogConfig
+    {
+        public NLog.LogLevel LogLevel { get; set; }
+        public string LogFileLocation { get; set; }
+        public bool LogToFile { get; set; }
+        public bool LogToConsole { get; set; }
+        public bool LogToDebug { get; set; }
     }
 }

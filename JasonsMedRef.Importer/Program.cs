@@ -10,11 +10,14 @@ using JasonsMedRef.Models;
 using JasonsMedRef.Repository;
 using System.Collections.Generic;
 using JasonsMedRef.Importer.Exporters;
+using NLog;
 
 namespace JasonsMedRef.Importer
 {
     class Program
     {
+        internal static Logger Logger { get; set; }
+
         public static async Task<int> Main(string[] args)
         {
             var builder = new ConfigurationBuilder()
@@ -24,33 +27,52 @@ namespace JasonsMedRef.Importer
             IConfigurationRoot configuration = builder.Build();
             var config = configuration.GetSection("JMR").Get<AppSettingsConfig>();
 
-            var importerToRun = configuration["run"];
-
-            ESImportRepository.Instance.Initialize(config.ElasticSearch.ServerUri);
+            Logger = LogManager.GetCurrentClassLogger();
+            Logger.Info("Logger Starting");
 
             try
             {
                 // manually download until you can find a better HTTP client that supports FTP URIs
-                await PharmaClassImporter.Import(config.WorkingFolder,
+                await TimeExecutionAndLog("Pharma Class Import", async () =>
+                {
+                    await PharmaClassImporter.Import(config.WorkingFolder,
                     config.SiteConfigs.Single(x => x.ShortName == "PharmaClass"));
+                });
 
-                await OrangeBookImporter.Import(config.WorkingFolder,
+                await TimeExecutionAndLog("Orange Book Import", async () =>
+                {
+                    await OrangeBookImporter.Import(config.WorkingFolder,
                     config.SiteConfigs.Single(x => x.ShortName == "ORANGEBOOK"));
+                });
 
-                await NdcImporter.Import(config.WorkingFolder,
+                await TimeExecutionAndLog("NDC Import", async () =>
+                {
+                    await NdcImporter.Import(config.WorkingFolder,
                     config.SiteConfigs.Single(x => x.ShortName == "NDC"));
+                });
 
-                //await FormularyExporter.Export();
-                //await JsonExporter.Export(@"c:\temp\drugs.json");
+                await TimeExecutionAndLog("Formulary Export", async () =>
+                {
+                    await FormularyExporter.Export();
+                });
 
-                await NadacImporter.Import(config.WorkingFolder,
-                    config.SiteConfigs.Single(x => x.ShortName == "NADAC"));
+                await TimeExecutionAndLog("JSON Export", async () =>
+                {
+                    await JsonExporter.Export(@"c:\temp\drugs.json");
+                });
 
-                await AcaFulImporter.Import(config.WorkingFolder,
-                    config.SiteConfigs.Single(x => x.ShortName == "FUL"));
+                //await NadacImporter.Import(config.WorkingFolder,
+                //    config.SiteConfigs.Single(x => x.ShortName == "NADAC"));
 
-                await StateDrugUtilizationImporter.Import(config.WorkingFolder,
-                    config.SiteConfigs.Single(x => x.ShortName == "SDU"));
+                //await AcaFulImporter.Import(config.WorkingFolder,
+                //    config.SiteConfigs.Single(x => x.ShortName == "FUL"));
+
+                //await StateDrugUtilizationImporter.Import(config.WorkingFolder,
+                //    config.SiteConfigs.Single(x => x.ShortName == "SDU"));
+
+                /* Elastic Search Import
+
+                ESImportRepository.Instance.Initialize(config.ElasticSearch.ServerUri);
 
                 await ESImportRepository.Instance.ChunkedBulkAdd<PharmaClass>(ImporterCache.Instance.PharmaClasses
                     .Select(x => x.Value).ToList());
@@ -87,6 +109,7 @@ namespace JasonsMedRef.Importer
                 ImporterCache.Instance.Nadacs.Clear();
 
                 await ESImportRepository.Instance.ChunkedBulkAdd<StateDrugUtilization>(ImporterCache.Instance.SDUs);
+                */
 
             }
             catch (Exception e)
@@ -95,6 +118,31 @@ namespace JasonsMedRef.Importer
             }
 
             return 0;
+        }
+
+        public static async Task<bool> TimeExecutionAndLog(string description, Action action)
+        {
+            DateTime start = DateTime.Now;
+            Logger.Debug($"Begin Invoke: {description}, {start.ToString("o")}");
+            bool errored = false;
+
+            try
+            {
+                action.Invoke();
+            }
+            catch (Exception exc)
+            {
+                Logger.Error(exc, $"ERROR in {description}!");
+            }
+            finally
+            {
+                DateTime end = DateTime.Now;
+                Logger.Debug($"End Invoke:   {description}, {end.ToString("o")}");
+                TimeSpan duration = end - start;
+                Logger.Info($"Time to Run:  {description}, {(int)duration.TotalHours}h {duration.Minutes}m {duration.Seconds}s {duration.Milliseconds}ms");
+            }
+
+            return !errored;
         }
     }
 }
