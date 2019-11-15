@@ -69,7 +69,8 @@ namespace JasonsMedRef.Importer.Importers
                         ProductNumber = rec.ProductNumber,
                         ReferenceListedDrug = rec.Rld,
                         ReferenceStandard = rec.Rs,
-                        TeCode = rec.TeCode
+                        TeCode = rec.TeCode,
+                        TeDecoded = rec.TeDecoded
                     };
 
                     ImporterCache.Instance.AddOrUpdate(drug, application);

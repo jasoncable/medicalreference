@@ -19,6 +19,7 @@ namespace JasonsMedRef.Importer.Maps
             Map(m => m.ApplicationNumber).Name("Appl_No");
             Map(m => m.ProductNumber).Name("Product_No");
             Map(m => m.TeCode).Name("TE_Code");
+            Map(m => m.TeDecoded).Name("TE_Code").TypeConverter<NullableEnumConverter>();
             Map(m => m.ApprovalDate).Name("Approval_Date").TypeConverter<NullableDateTimeConverter>();
             Map(m => m.Rld).Name("RLD").TypeConverter<BooleanTypeConverter>();
             Map(m => m.Rs).Name("RS").TypeConverter<BooleanTypeConverter>();

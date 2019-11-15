@@ -18,6 +18,7 @@ namespace JasonsMedRef.Models
         public string Applicant { get; set; }
         public string ApplicantFullName { get; set; }
         public string TeCode { get; set; }
+        public TherapeuticEquivalence? TeDecoded { get; set; }
         public bool? ReferenceListedDrug { get; set; }
         public bool? ReferenceStandard { get; set; }
     }

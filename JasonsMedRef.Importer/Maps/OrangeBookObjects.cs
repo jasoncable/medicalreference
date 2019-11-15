@@ -42,6 +42,7 @@ namespace JasonsMedRef.Importer.Maps
         public string ApplicationNumber { get; set; }
         public string ProductNumber { get; set; }
         public string TeCode { get; set; }
+        public TherapeuticEquivalence? TeDecoded { get; set; }
         public DateTime? ApprovalDate { get; set; } // Approved Prior to Jan 1, 1982
         public bool Rld { get; set; }
         public bool Rs { get; set; }

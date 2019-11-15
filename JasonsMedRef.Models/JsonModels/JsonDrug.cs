@@ -20,10 +20,14 @@ namespace JasonsMedRef.Models.JsonModels
     {
         // these 4 fields are the "primary key", if you will
         public string Ingredient { get; set; }
+        [JsonConverter(typeof(NullableStringEnumConverter))]
         public RouteOfAdministration? Route { get; set; }
+        [JsonConverter(typeof(NullableStringEnumConverter))]
         public DosageForm? DosageForm { get; set; }
+        [JsonConverter(typeof(NullableStringEnumConverter))]
         public DrugType? DrugType { get; set; }
 
+        [JsonConverter(typeof(NullableStringEnumConverter))]
         public DrugSchedule? Schedule { get; set; }
         public DateTime? StartMarketingDate { get; set; }
         public DateTime? EndMarketingDate { get; set; }

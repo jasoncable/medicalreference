@@ -1,4 +1,5 @@
 ﻿using JasonsMedRef.Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,7 @@ namespace JasonsMedRef.Models.JsonModels
 {
     public class JsonApplication
     {
+        [JsonConverter(typeof(NullableStringEnumConverter))]
         public ApplicationType? ApplicationType { get; set; }
         public string ApplicationNumber { get; set; }
         public string ProductNumber { get; set; }
@@ -14,6 +16,8 @@ namespace JasonsMedRef.Models.JsonModels
         public string Applicant { get; set; }
         public string ApplicantFullName { get; set; }
         public string TeCode { get; set; }
+        [JsonConverter(typeof(NullableStringEnumConverter))]
+        public TherapeuticEquivalence? TeDecoded { get; set; }
         public bool? ReferenceListedDrug { get; set; }
         public bool? ReferenceStandard { get; set; }
 

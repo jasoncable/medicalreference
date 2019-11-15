@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using JasonsMedRef.Models.JsonModels;
 using JasonsMedRef.Importer.Importers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace JasonsMedRef.Importer.Exporters
 {
@@ -39,7 +40,7 @@ namespace JasonsMedRef.Importer.Exporters
                      //join e in ImporterCache.Instance.Exclusivities on app.Id equals e.ApplicationId
                      //join pat in ImporterCache.Instance.Patents on app.Id equals pat.ApplicationId
                      //join p in ImporterCache.Instance.Packages on app.ApplicationNumber equals p.ApplicationNumber
-                 where d.Value.Ingredient.StartsWith("a", StringComparison.CurrentCultureIgnoreCase)
+                 where d.Value.Ingredient.StartsWith("c", StringComparison.CurrentCultureIgnoreCase)
                  select new JsonDrug
                  {
                      Ingredient = d.Value.Ingredient,
@@ -65,6 +66,7 @@ namespace JasonsMedRef.Importer.Exporters
                                          ReferenceListedDrug = app.ReferenceListedDrug,
                                          ReferenceStandard = app.ReferenceStandard,
                                          TeCode = app.TeCode,
+                                         TeDecoded = app.TeDecoded,
                                          Exclusivities = (from e in ImporterCache.Instance.Exclusivities
                                                           where e.DrugId == d.Value.Id // && e.ApplicationId == app.Id
                                                           select new JsonExclusivity
