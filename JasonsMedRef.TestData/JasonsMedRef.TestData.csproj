@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>Jaxosoft.TestData</PackageId>
+    <Authors>Jason L. Cable</Authors>
+    <Company>Jason L. Cable</Company>
+    <Product>Jaxosoft.TestData</Product>
+    <Copyright>Copyright (c) 2018-2019 Jason L. Cable</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

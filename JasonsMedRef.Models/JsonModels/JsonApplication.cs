@@ -8,7 +8,7 @@ namespace JasonsMedRef.Models.JsonModels
 {
     public class JsonApplication
     {
-        [JsonConverter(typeof(NullableStringEnumConverter))]
+        [JsonConverter(typeof(NullableIntEnumConverter))]
         public ApplicationType? ApplicationType { get; set; }
         public string ApplicationNumber { get; set; }
         public string ProductNumber { get; set; }
@@ -16,7 +16,7 @@ namespace JasonsMedRef.Models.JsonModels
         public string Applicant { get; set; }
         public string ApplicantFullName { get; set; }
         public string TeCode { get; set; }
-        [JsonConverter(typeof(NullableStringEnumConverter))]
+        [JsonConverter(typeof(NullableIntEnumConverter))]
         public TherapeuticEquivalence? TeDecoded { get; set; }
         public bool? ReferenceListedDrug { get; set; }
         public bool? ReferenceStandard { get; set; }

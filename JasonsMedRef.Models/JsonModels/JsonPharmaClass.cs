@@ -9,7 +9,7 @@ namespace JasonsMedRef.Models.JsonModels
     public class JsonPharmaClass
     {
         public string Name { get; set; }
-        [JsonConverter(typeof(NullableStringEnumConverter))]
+        [JsonConverter(typeof(NullableIntEnumConverter))]
         public PharmaClassClassification? Classification { get; set; }
     }
 }
