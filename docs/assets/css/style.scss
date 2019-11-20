@@ -1,4 +1,13 @@
 ---
 ---
 
-@import 'jekyll-theme-cayman';
+@import "{{ site.theme }}";
+
+
+img.headerLogo {
+    max-height: 300px;
+    max-width: 600px;
+    margin: 2em;
+    display: block;
+}
+

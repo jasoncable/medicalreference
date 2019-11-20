@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Jason's Medical Reference
+title: Jaxosoft Medical Reference
 email: jason@jasoncable.com
 description: >- # this means to ignore newlines until "baseurl:"
   A command-line parser and processor for .NET Core 3.0+ and C# 8.0+
@@ -48,4 +48,4 @@ defaults:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-theme: jekyll-theme-cayman
+theme: jekyll-theme-architect
