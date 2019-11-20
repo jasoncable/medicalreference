@@ -17,8 +17,8 @@ title: Jaxosoft Medical Reference
 email: jason@jasoncable.com
 description: >- # this means to ignore newlines until "baseurl:"
   A command-line parser and processor for .NET Core 3.0+ and C# 8.0+
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/medicalreference" # the subpath of your site, e.g. /blog
+url: "https://jasoncable.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: gaypgh
 github_username:  jasoncable
 show_downloads: true
