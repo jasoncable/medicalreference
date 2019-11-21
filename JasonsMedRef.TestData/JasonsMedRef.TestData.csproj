@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -17,6 +17,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://jasoncable.github.io/medicalreference</PackageProjectUrl>
     <PackageIconUrl>https://jasoncable.github.io/medicalreference/assets/logo-square.svg</PackageIconUrl>
+    <PackageIcon>logo-square.png</PackageIcon>
     <RepositoryUrl>https://github.com/jasoncable/medicalreference</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>.NET, .NETCore, C#, CSharp, test-data, education</PackageTags>
@@ -30,6 +31,7 @@
 
   <ItemGroup>
     <None Remove="drugs.zip" />
+    <None Include="logo-square.png" Pack="true" Visible="false" PackagePath="" />
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -52,4 +54,9 @@
     <Folder Include="Enums\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="logo-square.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
