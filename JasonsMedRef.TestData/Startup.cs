@@ -1,23 +1,12 @@
-﻿using JasonsMedRef.Models.JsonModels;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
-using System.IO;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
-using ICSharpCode.SharpZipLib;
-using ICSharpCode.SharpZipLib.Core;
+using Jaxosoft.TestData;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Reflection;
 
-namespace JasonsMedRef.TestData
+namespace Jaxosoft.TestData
 {
     public static class Startup
     {
@@ -27,7 +16,7 @@ namespace JasonsMedRef.TestData
             string zipOnDisk = Path.Combine(baseDir, "drugs.zip");
             string jsonOnDisk = Path.Combine(baseDir, "drugs.json");
             byte[] buffer = new byte[64 * 1024];
-            using Stream stream = Assembly.GetAssembly(typeof(Startup)).GetManifestResourceStream("JasonsMedRef.TestData.drugs.zip");
+            using Stream stream = Assembly.GetAssembly(typeof(Startup)).GetManifestResourceStream("Jaxosoft.TestData.drugs.zip");
             using ZipInputStream zipStream = new ZipInputStream(stream);
             using FileStream fileStream = new FileStream(jsonOnDisk, FileMode.Create, FileAccess.ReadWrite);
             ZipEntry entry = zipStream.GetNextEntry();

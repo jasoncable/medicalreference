@@ -7,15 +7,33 @@
     <Company>Jason L. Cable</Company>
     <Product>Jaxosoft.TestData</Product>
     <Copyright>Copyright (c) 2018-2019 Jason L. Cable</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <AssemblyName>Jaxosoft.TestData</AssemblyName>
+    <RootNamespace>Jaxosoft.TestData</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>0.1.0</Version>
+    <Description>A library composed of free, open source data from the US Government to help people learn to use LINQ without the requirements of needing an external database.  This data is not regularly updated.  It must not be used for legitimate medical purposes.  The available drugs in this package are those that begin with the letter "C".</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://jasoncable.github.io/medicalreference</PackageProjectUrl>
+    <PackageIconUrl>https://jasoncable.github.io/medicalreference/assets/logo-square.svg</PackageIconUrl>
+    <RepositoryUrl>https://github.com/jasoncable/medicalreference</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>.NET, .NETCore, C#, CSharp, test-data, education</PackageTags>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>true</Optimize>
+    <DefineConstants />
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="drugs.zip" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +48,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JasonsMedRef.Models\JasonsMedRef.Models.csproj" />
+    <Folder Include="Models\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
 
 </Project>

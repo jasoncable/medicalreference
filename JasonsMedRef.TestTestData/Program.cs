@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
-using System.IO;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using JasonsMedRef.Models.JsonModels;
+﻿using Jaxosoft.TestData;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
 
-namespace JasonsMedRef.TestTestData
+namespace Jaxosoft.TestTestData
 {
     class Program
     {
         static void Main(string[] args)
         {
-            JsonDrugs drugs = JasonsMedRef.TestData.Startup.LoadData();
+            JsonDrugs drugs = Startup.LoadData();
 
             string line;
             JsonSerializer jsz = new JsonSerializer();

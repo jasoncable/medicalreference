@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>Jaxosoft.TestTestData</AssemblyName>
+    <RootNamespace>Jaxosoft.TestTestData</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
