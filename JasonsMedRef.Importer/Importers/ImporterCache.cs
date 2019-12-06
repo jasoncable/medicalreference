@@ -195,6 +195,9 @@ namespace JasonsMedRef.Importer.Importers
                 else
                     dMemory.StartMarketingDate = d.StartMarketingDate;
 
+                if (dMemory.MarketingCategory == MarketingCategory.ApprovedProduct && d.MarketingCategory.HasValue)
+                    dMemory.MarketingCategory = d.MarketingCategory;
+
                 drugId = dMemory.Id;
             }
             else

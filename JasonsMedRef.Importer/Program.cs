@@ -51,15 +51,19 @@ namespace JasonsMedRef.Importer
                     config.SiteConfigs.Single(x => x.ShortName == "NDC"));
                 });
 
-                //await TimeExecutionAndLog("Formulary Export", async () =>
-                //{
-                //    await FormularyExporter.Export();
-                //});
+                await TimeExecutionAndLog("SQL Server Export", async () => {
+                    await SqlServerDbExporter.Export();
+                });
 
-                //await TimeExecutionAndLog("JSON Export", async () =>
-                //{
-                //    await JsonExporter.Export(@"c:\temp\drugs.json");
-                //});
+                await TimeExecutionAndLog("Formulary Export", async () =>
+                {
+                    await FormularyExporter.Export();
+                });
+
+                await TimeExecutionAndLog("JSON Export", async () =>
+                {
+                    await JsonExporter.Export(@"c:\temp\drugs.json");
+                });
 
                 await TimeExecutionAndLog("Scheduled Drug Export", async () =>
                 {

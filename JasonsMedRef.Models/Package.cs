@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JasonsMedRef.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,8 @@ namespace JasonsMedRef.Models
         public string ApplicationNumber { get; set; }
         public string Ndc { get; set; }
         public string Description { get; set; }
+        public MarketingCategory? MarketingCategory { get; set; }
+        public string MarketingCategoryText { get; set; }
         public DateTime? StartMarketingDate { get; set; }
         public DateTime? EndMarketingDate { get; set; }
     }

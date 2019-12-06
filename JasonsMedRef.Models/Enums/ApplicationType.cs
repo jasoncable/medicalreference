@@ -10,6 +10,7 @@ namespace JasonsMedRef.Models.Enums
         New = 1,
         [EnumImportValue(new string[] {"A"})]
         Abbreviated = 1,
+        [EnumImportValue(new string[] { "BIO" })] // fake
         Biologic = 3
     }
 }

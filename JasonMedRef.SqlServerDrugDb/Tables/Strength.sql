@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Strength]
+(
+    [Id] INT NOT NULL IDENTITY,
+    [DrugId] INT NOT NULL,
+    [Name] VARCHAR(MAX) NOT NULL,
+    CONSTRAINT [FK_Strength_Drug] FOREIGN KEY (DrugId) REFERENCES Drug(Id),
+    CONSTRAINT [PK_Strength] PRIMARY KEY CLUSTERED (Id)
+)

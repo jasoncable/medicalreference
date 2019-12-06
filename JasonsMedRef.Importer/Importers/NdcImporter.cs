@@ -74,7 +74,8 @@ namespace JasonsMedRef.Importer.Importers
                         Strengths = new List<string> {$"{rec.ActiveNumeratorStrength} {_rRemoveSlashOne.Replace(rec.ActiveIngredientUnit,String.Empty)}"},
                         StartMarketingDate = rec.StartMarketingDate,
                         EndMarketingDate = rec.EndMarketingDate,
-                        PharmaClassesText = pharmaClassesText
+                        PharmaClassesText = pharmaClassesText,
+                        MarketingCategory = rec.MarketingCategoryName
                     };
 
                     if (!String.IsNullOrWhiteSpace(rec.ProprietaryNameSuffix))

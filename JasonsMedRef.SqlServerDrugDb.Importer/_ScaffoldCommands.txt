@@ -1,0 +1,3 @@
+﻿//Scaffold-DbContext "Server=.;Database=JLCDrugs;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -Project JasonsMedRef.SqlServerDrugDb.Importer -StartupProject JasonsMedRef.SqlServerDrugDb.Importer -force -Context DrugDbContext
+
+Scaffold-DbContext "Server=.;Database=JLCDrugs;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -Project JasonsMedRef.SqlServerDrugDb -force -Context DrugDbContext

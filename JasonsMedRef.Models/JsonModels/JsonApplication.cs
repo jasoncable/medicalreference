@@ -20,6 +20,7 @@ namespace JasonsMedRef.Models.JsonModels
         public TherapeuticEquivalence? TeDecoded { get; set; }
         public bool? ReferenceListedDrug { get; set; }
         public bool? ReferenceStandard { get; set; }
+        public string Strength { get; set; }
 
         public List<JsonExclusivity> Exclusivities { get; set; } = new List<JsonExclusivity>();
         public List<JsonPatent> Patents { get; set; } = new List<JsonPatent>();

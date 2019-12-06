@@ -65,6 +65,8 @@ namespace JasonsMedRef.Models.Enums
         [EnumImportValue(new string[] { "Unapproved homeopathic" })]
         UnapprovedHomeopathic,
         [EnumImportValue(new string[] { "Unapproved medical gas" })]
-        UnapprovedMedicalGas
+        UnapprovedMedicalGas,
+        [EnumImportValue(new string[] { "Approved Product" })] // fake
+        ApprovedProduct
     }
 }

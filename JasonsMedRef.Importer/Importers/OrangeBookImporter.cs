@@ -56,9 +56,10 @@ namespace JasonsMedRef.Importer.Importers
                         RouteOfAdmin = (RouteOfAdministration?) route,
                         RouteOfAdminText = dfRoute[1],
                         DrugType = rec.Type,
+                        MarketingCategory = MarketingCategory.ApprovedProduct,
                         Strengths = new List<string> {rec.Strength}
                     };
-                       
+
                     var application = new Application
                     {
                         ApplicationType = rec.ApplicationType,
@@ -70,7 +71,8 @@ namespace JasonsMedRef.Importer.Importers
                         ReferenceListedDrug = rec.Rld,
                         ReferenceStandard = rec.Rs,
                         TeCode = rec.TeCode,
-                        TeDecoded = rec.TeDecoded
+                        TeDecoded = rec.TeDecoded,
+                        Strength = rec.Strength
                     };
 
                     ImporterCache.Instance.AddOrUpdate(drug, application);

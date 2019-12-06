@@ -19,6 +19,7 @@ namespace JasonsMedRef.Models
         public DrugSchedule? Schedule { get; set; }
         public DateTime? StartMarketingDate { get; set; }
         public DateTime? EndMarketingDate { get; set; }
+        public MarketingCategory? MarketingCategory { get; set; }
 
         public List<string> Strengths { get; set; } = new List<string>();
         public List<string> TradeNames { get; set; } = new List<string>();

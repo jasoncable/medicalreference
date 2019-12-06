@@ -26,6 +26,8 @@ namespace JasonsMedRef.Models.JsonModels
         public DosageForm? DosageForm { get; set; }
         [JsonConverter(typeof(NullableIntEnumConverter))]
         public DrugType? DrugType { get; set; }
+        [JsonConverter(typeof(NullableIntEnumConverter))]
+        public MarketingCategory? MarketingCategory { get; set; }
 
         [JsonConverter(typeof(NullableIntEnumConverter))]
         public DrugSchedule? Schedule { get; set; }

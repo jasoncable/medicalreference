@@ -40,7 +40,8 @@ namespace JasonsMedRef.Importer.Exporters
                      //join e in ImporterCache.Instance.Exclusivities on app.Id equals e.ApplicationId
                      //join pat in ImporterCache.Instance.Patents on app.Id equals pat.ApplicationId
                      //join p in ImporterCache.Instance.Packages on app.ApplicationNumber equals p.ApplicationNumber
-                 where d.Value.Ingredient.StartsWith("c", StringComparison.CurrentCultureIgnoreCase)
+                 //where d.Value.Ingredient.StartsWith("c", StringComparison.CurrentCultureIgnoreCase)
+                 orderby d.Key.Ingredient ascending
                  select new JsonDrug
                  {
                      Ingredient = d.Value.Ingredient,
@@ -51,6 +52,7 @@ namespace JasonsMedRef.Importer.Exporters
                      EndMarketingDate = d.Value.EndMarketingDate,
                      Schedule = d.Value.Schedule,
                      TradeNames = d.Value.TradeNames,
+                     MarketingCategory = d.Value.MarketingCategory,
                      Applications = (from app in ImporterCache.Instance.Apps
                                      join a2a in ImporterCache.Instance.AppToApp on app.Id equals a2a.Value
                                      join a2d in ImporterCache.Instance.AppToDrug on a2a.Key equals a2d.Key
@@ -67,6 +69,7 @@ namespace JasonsMedRef.Importer.Exporters
                                          ReferenceStandard = app.ReferenceStandard,
                                          TeCode = app.TeCode,
                                          TeDecoded = app.TeDecoded,
+                                         Strength = app.Strength,
                                          Exclusivities = (from e in ImporterCache.Instance.Exclusivities
                                                           where e.DrugId == d.Value.Id // && e.ApplicationId == app.Id
                                                           select new JsonExclusivity
@@ -89,7 +92,7 @@ namespace JasonsMedRef.Importer.Exporters
                                                          Description = pkg.Description,
                                                          EndMarketingDate = pkg.EndMarketingDate,
                                                          LabelerName = pkg.LabelerName,
-                                                         Ndc = pkg.LabelerName,
+                                                         Ndc = pkg.Ndc,
                                                          StartMarketingDate = pkg.StartMarketingDate
                                                      }).ToList()
                                      }).ToList(),
