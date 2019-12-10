@@ -18,9 +18,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JasonsMedRef.Importer.Exporters
 {
-    public static class SqlServerDbExporter
+    public class SqlServerDbExporter
     {
-        public async static Task<int> Export()
+        public static async Task<int> Export()
         {
             // assume empty database!
             /*
@@ -42,7 +42,12 @@ namespace JasonsMedRef.Importer.Exporters
                 delete from therapeuticequivalencecode
                 delete from drugtype
             */
-            using DrugDbContext context = new DrugDbContext();
+            DbContextOptionsBuilder<DrugDbContext> options = new DbContextOptionsBuilder<DrugDbContext>();
+            options.UseSqlServer("Server=.;Database=JLCDrugs;Trusted_Connection=True;");
+            options.EnableDetailedErrors(true);
+            using DrugDbContext context = new DrugDbContext(options.Options);
+
+            context.Database.OpenConnection();
 
             await AddPharmaClassClasses(context);
             var pharmaClassClassCache = context.PharmaClassClass.AsNoTracking().ToDictionary(x => x.Name, y => y.Id);
@@ -146,7 +151,7 @@ namespace JasonsMedRef.Importer.Exporters
                 drug.TradeName = d.TradeNames.Select(x => new TradeName { Name = x }).ToList();
 
                 drug.DrugPharmaClassXref = (from pc in Importers.ImporterCache.Instance.PharmaClasses
-                                            where d.PharmaClasses.Contains(pc.Value.Id) && pc.Value != null
+                                            where d.PharmaClasses.Contains(pc.Value.Id) && pc.Value != null && !String.IsNullOrWhiteSpace(pc.Value.Name)
                                             select new DrugPharmaClassXref
                                             {
                                                 PharmaClassId = pharmaClassCache[pc.Value.Name]

@@ -36,24 +36,27 @@ namespace JasonsMedRef.Importer
                 await TimeExecutionAndLog("Pharma Class Import", async () =>
                 {
                     await PharmaClassImporter.Import(config.WorkingFolder,
-                    config.SiteConfigs.Single(x => x.ShortName == "PharmaClass"));
+                        config.SiteConfigs.Single(x => x.ShortName == "PharmaClass"));
                 });
 
                 await TimeExecutionAndLog("Orange Book Import", async () =>
                 {
                     await OrangeBookImporter.Import(config.WorkingFolder,
-                    config.SiteConfigs.Single(x => x.ShortName == "ORANGEBOOK"));
+                        config.SiteConfigs.Single(x => x.ShortName == "ORANGEBOOK"));
                 });
 
                 await TimeExecutionAndLog("NDC Import", async () =>
                 {
                     await NdcImporter.Import(config.WorkingFolder,
-                    config.SiteConfigs.Single(x => x.ShortName == "NDC"));
+                        config.SiteConfigs.Single(x => x.ShortName == "NDC"));
                 });
 
-                await TimeExecutionAndLog("SQL Server Export", async () => {
+                //await TimeExecutionAndLog("SQL Server Export", async () =>
+                //{
                     await SqlServerDbExporter.Export();
-                });
+                //});
+
+                //await SqlServerDbExporter.Export();
 
                 //await TimeExecutionAndLog("Formulary Export", async () =>
                 //{
@@ -137,7 +140,7 @@ namespace JasonsMedRef.Importer
 
             try
             {
-                action.DynamicInvoke();
+                await Task.Run(action);
             }
             catch (Exception exc)
             {

@@ -271,7 +271,6 @@ namespace JasonsMedRef.SqlServerDrugDb
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("NAME")
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
