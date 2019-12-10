@@ -55,20 +55,20 @@ namespace JasonsMedRef.Importer
                     await SqlServerDbExporter.Export();
                 });
 
-                await TimeExecutionAndLog("Formulary Export", async () =>
-                {
-                    await FormularyExporter.Export();
-                });
+                //await TimeExecutionAndLog("Formulary Export", async () =>
+                //{
+                //    await FormularyExporter.Export();
+                //});
 
-                await TimeExecutionAndLog("JSON Export", async () =>
-                {
-                    await JsonExporter.Export(@"c:\temp\drugs.json");
-                });
+                //await TimeExecutionAndLog("JSON Export", async () =>
+                //{
+                //    await JsonExporter.Export(@"c:\temp\drugs.json");
+                //});
 
-                await TimeExecutionAndLog("Scheduled Drug Export", async () =>
-                {
-                    await ScheduleExporter.Export();
-                });
+                //await TimeExecutionAndLog("Scheduled Drug Export", async () =>
+                //{
+                //    await ScheduleExporter.Export();
+                //});
 
                 //await NadacImporter.Import(config.WorkingFolder,
                 //    config.SiteConfigs.Single(x => x.ShortName == "NADAC"));
@@ -137,7 +137,7 @@ namespace JasonsMedRef.Importer
 
             try
             {
-                action.Invoke();
+                action.DynamicInvoke();
             }
             catch (Exception exc)
             {

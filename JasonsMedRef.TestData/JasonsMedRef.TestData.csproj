@@ -12,7 +12,7 @@
     <RootNamespace>Jaxosoft.TestData</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>A library composed of free, open source data from the US Government to help people learn to use LINQ without the requirements of needing an external database.  This data is not regularly updated.  It must not be used for legitimate medical purposes.  The available drugs in this package are those that begin with the letter "C".</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://jasoncable.github.io/medicalreference</PackageProjectUrl>

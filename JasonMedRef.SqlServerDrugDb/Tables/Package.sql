@@ -2,9 +2,9 @@
 (
     [Id] INT NOT NULL IDENTITY,
     [DrugId] INT NOT NULL,
-    [Ndc] CHAR(11) NOT NULL,
-    [NdcDashed] VARCHAR(15) NULL,
-    [LabelerName] VARCHAR(500) NOT NULL,
+    [Ndc] VARCHAR(100) NOT NULL,
+    [NdcDashed] VARCHAR(200) NULL,
+    [LabelerName] VARCHAR(MAX) NOT NULL,
     [Description] VARCHAR(MAX) NOT NULL,
     [StartMarketingDate] DATETIME NULL,
     [EndMarketingDate] DATETIME NULL,

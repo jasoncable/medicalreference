@@ -9,5 +9,6 @@ namespace Jaxosoft.TestData
         public string Description { get; set; }
         public DateTime? StartMarketingDate { get; set; }
         public DateTime? EndMarketingDate { get; set; }
+        public MarketingCategory? MarketingCategory { get; set; }
     }
 }

@@ -48,27 +48,27 @@ namespace JasonsMedRef.SqlServerDrugDb
             {
                 entity.Property(e => e.Applicant)
                     .IsRequired()
-                    .HasMaxLength(500)
+                    .HasMaxLength(1000)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ApplicantFullName).IsUnicode(false);
 
                 entity.Property(e => e.ApplicationNumber)
                     .IsRequired()
-                    .HasMaxLength(20)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ApprovalDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ProductNumber)
                     .IsRequired()
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Strength).IsUnicode(false);
 
                 entity.HasOne(d => d.ApplicationType)
-                    .WithMany(p => p.InverseApplicationType)
+                    .WithMany(p => p.Application)
                     .HasForeignKey(d => d.ApplicationTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Application_ApplicationType");
@@ -200,12 +200,10 @@ namespace JasonsMedRef.SqlServerDrugDb
             {
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.NameExtended)
                     .HasMaxLength(500)
                     .IsUnicode(false);
+
+                entity.Property(e => e.NameExtended).IsUnicode(false);
             });
 
             modelBuilder.Entity<Package>(entity =>
@@ -218,17 +216,15 @@ namespace JasonsMedRef.SqlServerDrugDb
 
                 entity.Property(e => e.LabelerName)
                     .IsRequired()
-                    .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Ndc)
                     .IsRequired()
-                    .HasMaxLength(11)
-                    .IsUnicode(false)
-                    .IsFixedLength();
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NdcDashed)
-                    .HasMaxLength(15)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.StartMarketingDate).HasColumnType("datetime");
@@ -246,7 +242,6 @@ namespace JasonsMedRef.SqlServerDrugDb
 
                 entity.Property(e => e.Number)
                     .IsRequired()
-                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Application)

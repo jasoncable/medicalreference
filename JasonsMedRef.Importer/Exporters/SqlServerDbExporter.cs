@@ -31,6 +31,7 @@ namespace JasonsMedRef.Importer.Exporters
                 delete from drugpharmaclassxref
                 delete from strength
                 delete from [application]
+                delete from drug
                 delete from applicationtype
                 delete from dosageform
                 delete from drugschedule
@@ -62,7 +63,7 @@ namespace JasonsMedRef.Importer.Exporters
             await AddTECodes(context);
             var teCodeCache = context.TherapeuticEquivalenceCode.AsNoTracking().ToDictionary(x => x.Code, y => y.Id);
 
-            context.SaveChanges(); // just in case
+            await context.SaveChangesAsync(); // just in case
 
             int saveEvery = 100;
             int i = 1;
@@ -71,8 +72,15 @@ namespace JasonsMedRef.Importer.Exporters
             {
                 if(i % saveEvery == 0)
                 {
-                    context.SaveChanges();
-                    context.ChangeTracker.AcceptAllChanges();
+                    try
+                    {
+                        await context.SaveChangesAsync();
+                        context.ChangeTracker.AcceptAllChanges();
+                    }
+                    catch (Exception exc)
+                    {
+                        Program.Logger.Error(exc);
+                    }
                 }
 
                 Drug drug = new Drug
@@ -159,7 +167,14 @@ namespace JasonsMedRef.Importer.Exporters
                 i++;
             }
 
-            context.SaveChanges();
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch(Exception exc)
+            {
+                Program.Logger.Error(exc);
+            }
 
             return 0;
         }

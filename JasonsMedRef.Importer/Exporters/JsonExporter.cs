@@ -40,7 +40,7 @@ namespace JasonsMedRef.Importer.Exporters
                      //join e in ImporterCache.Instance.Exclusivities on app.Id equals e.ApplicationId
                      //join pat in ImporterCache.Instance.Patents on app.Id equals pat.ApplicationId
                      //join p in ImporterCache.Instance.Packages on app.ApplicationNumber equals p.ApplicationNumber
-                 //where d.Value.Ingredient.StartsWith("c", StringComparison.CurrentCultureIgnoreCase)
+                 where d.Value.Ingredient.StartsWith("c", StringComparison.CurrentCultureIgnoreCase)
                  orderby d.Key.Ingredient ascending
                  select new JsonDrug
                  {
